@@ -31,9 +31,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PORT=8080
 
 WORKDIR /recommendationservice
-RUN wget -O /bin/grpc_health_probe \
-  https://github.com/grpc-ecosystem/grpc-health-probe/releases/latest/download/grpc_health_probe-linux-amd64 && \
-  chmod +x /bin/grpc_health_probe
+
 
 # Copy installed Python packages
 COPY --from=builder /usr/local/lib/python3.10/ /usr/local/lib/python3.10/
