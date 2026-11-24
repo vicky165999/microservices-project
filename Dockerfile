@@ -26,6 +26,13 @@ RUN pip install --no-cache-dir --no-build-isolation \
 
 # Runtime stage
 FROM base AS runtime
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget -qO /bin/grpc_health_probe \
+    https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/v0.4.24/grpc_health_probe-linux-amd64 && \
+    chmod +x /bin/grpc_health_probe && \
+    apt-get remove -y wget && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV PYTHONUNBUFFERED=1
 ENV PORT=8080
